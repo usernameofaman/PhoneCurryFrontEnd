@@ -52,7 +52,7 @@ function ExtractData(props) {
 
   const PostData = async (e) => {
     e.preventDefault();
-    const address = url;
+    // const address = url;
     const websiteData = await fetch("https://www.google.com",{method:"GET"})
     console.log(websiteData)
 
