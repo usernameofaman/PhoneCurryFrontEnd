@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import MobileMenu from './Mobile'
+import { trueFunc } from "boolbase";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,11 +24,21 @@ const useStyles = makeStyles((theme) => ({
 
 function Nav(props) {
   const classes = useStyles();
+  const [ham , setHam] = React.useState(false)
+  const showMobileMenu = () => {
+    setHam(!ham)
+  }
+  let PhoneData = {
+    name:"Oneplus",
+    ram:"8GB"
+  }
+
   return (
     <>
       <AppBar position="static">
         <Toolbar>
           <IconButton
+            onClick={showMobileMenu}
             edge="start"
             className={classes.menuButton}
             color="inherit"
@@ -41,6 +53,8 @@ function Nav(props) {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
+      {ham===true ? <MobileMenu closeMobileMenu={showMobileMenu} PhoneData={PhoneData} name="sarthak"/> : "" }
+      
     </>
   );
 }

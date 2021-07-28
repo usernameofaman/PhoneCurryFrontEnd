@@ -6,14 +6,14 @@ import Home from "./components/Home/Home"
 import Redux from "./components/Redux/ReduxUI"
 import Nav from "./components/Nav/"
 import SavePhoneData from "./components/SavePhoneData/SavePhoneData"
-import ViewPhone from "./components/ViewPhone/ViewPhone"
+import ViewPhone from "./components/ViewPhone"
 import ExtractData from "./components/extractData/extractData"
 import "./App.css"
 
 function App() {
   return (
     <BrowserRouter>
-      <Nav />
+      <Nav name={"sarthak"}/>
       <Switch>
         <Route exact path="/register" component={Register} />
         <Route exact path="/" component={Home} />

@@ -7,6 +7,9 @@ import Button from "@material-ui/core/Button";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+
+
 
 
 
@@ -82,7 +85,7 @@ function SavePhoneData(props) {
     setPhone({ ...phone, [name]: value });
   };
 
-  
+
   const PostData = async (e) => {
     e.preventDefault();
     const { Name,
@@ -183,7 +186,7 @@ function SavePhoneData(props) {
               />
 
               <form style={{ marginTop: "10px" }} className={classes.container} noValidate>
-                <TextField 
+                <TextField
                   variant="outlined"
                   id="datetime-local"
                   name="ReleaseDate"
@@ -205,7 +208,7 @@ function SavePhoneData(props) {
                 onChange={handleInputs}
 
               />
-              
+
               <TextField
                 variant="outlined"
                 className={classes.TextField}
@@ -384,6 +387,25 @@ function SavePhoneData(props) {
                   <option value={"Super AMOLED"}>Super AMOLED</option>
                 </Select>
               </FormControl>
+
+
+              <Button
+                variant="contained"
+                component="label" 
+                variant="contained"
+                color="default"
+                className={classes.button}
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload File
+                <input
+                  type="file"
+                  hidden
+                />
+              </Button>
+
+
+
 
             </div>
           </div>
