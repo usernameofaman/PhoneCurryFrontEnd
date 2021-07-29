@@ -25,7 +25,7 @@ export default class index extends Component {
                         .catch((err)=> console.log(err));
             
             this.setState({phoneData:res.data})
-            // console.log(this.state.phoneData)
+            console.log(this.state.phoneData)
 
     }
 

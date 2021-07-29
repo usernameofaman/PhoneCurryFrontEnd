@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MobileMenu from './Mobile'
-import { trueFunc } from "boolbase";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +34,7 @@ function Nav(props) {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar style={{background: "linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%)", position:"static"}}>
         <Toolbar>
           <IconButton
             onClick={showMobileMenu}
