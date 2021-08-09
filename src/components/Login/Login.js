@@ -60,7 +60,7 @@ function Login() {
     if (res.status === "ok") {
       handleClick()
       // window.alert("Login Sucessfull");
-      setTimeout(function(){history.push("/home"); }, 1000);
+      setTimeout(function(){history.push("/savePhoneData"); }, 1000);
       // history.push("/home");
     } else {
       window.alert(res.error)

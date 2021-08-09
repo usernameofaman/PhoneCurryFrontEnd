@@ -1,56 +1,128 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import styled from "styled-components";
-import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardHeader from '@material-ui/core/CardHeader';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import clsx from 'clsx';
+
+
+
+
+const drawerWidth = 240;
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 345,
-    backgroundColor: "rgba(0, 0, 0, 0.51)",
-    
-
-
+  cardd: {
+    width: "250px",
+  },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  },
+  DiaCard: {
+    // flexGrow: 1,
+    // maxWidth : 400,
+    minWidth: 350,
+    minHeight: 550,
+    marginTop: 90,
+
+
+
+  },
+  root: {
+    flexGrow: 1,
+    maxWidth: 345,
+
+
+
+
+  },
+
+  insidedialoge: {
+
+  },
   title: {
     flexGrow: 1,
   },
-  TextField: {
-    width: "100%",
-    margin: "10px 0px 0px 0px"
-  },
+
   card: {
     // display: "flex",
     // flexDirection: "column",
     // justifyContent: "center",
     // alignItems: "center",
-    width: "250px",
-    height: "170px",
-    padding: "25px",
-    marginTop: "30px",
-    backgroundColor: "#7F000000",
-    cursor: "pointer"
+    // width: "250px",
+    // height: "170px",
+    // padding: "25px",
+    // marginTop: "30px",
+    // backgroundColor: "#7F000000",
+    cursor: "pointer",
 
 
   },
   media: {
-    height: 240,
+    height: 340,
   },
 
   confirmButton: {
@@ -59,244 +131,152 @@ const useStyles = makeStyles((theme) => ({
   },
   phoneCard: {
     margin: "10px 0px 10px 0px ",
-  }
+  },
+  root: {
+    display: 'flex',
+  },
+
 }));
 
 const Container = styled.div`
 
-background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+// // background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
   display: flex;
-  justify-content: center;
-  flex-direction:Row;
-  align-items:center;
-  gap: 80px;
-  background: ;
-`;
+  flex-wrap : wrap;
+  justify-content: space-between;
+//   flex-direction:row;
+  // align-items:center;
+  
+//   height : 15vh;
+padding : 10%;
+
+// `;
 
 function SavePhoneData(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  }
+  const [selectedPhone, setSelectedPhone] = React.useState('');
+
+  const handleClickOpen = (phone) => {
+    console.log(phone)
+    setSelectedPhone(phone)
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+
+
   return (
     <>
-      {/* <Container>
-        {props.state.phoneData.map((phone) => (
-          <Card className={classes.card}>
-            <Typography>
-              {phone.Name}
-            </Typography>
-            <Typography>
-              {phone.Price}
-
-            </Typography>
-            <Typography>
-              {phone.Brand}
-            </Typography>
-          </Card>
-        ))}
-      </Container>
       <Container>
         {props.state.phoneData.map((phone) => (
-          <Card className={classes.card}>
-            <Typography>
-              {phone.Name}
-            </Typography>
-            <Typography>
-              {phone.Price}
 
-            </Typography>
-            <Typography>
-              {phone.Brand}
-            </Typography>
-          </Card>
-        ))}
-      </Container>
-      <Container>
-        {props.state.phoneData.map((phone) => (
-          <Card className={classes.card}>
-            <Typography>
-              {phone.Name}
-            </Typography>
-            <Typography>
-              {phone.Price}
-
-            </Typography>
-            <Typography>
-              {phone.Brand}
-            </Typography>
-          </Card>
-        ))}
-      </Container>
-      <Container>
-        {props.state.phoneData.map((phone) => (
-          <Card className={classes.card}>
-            <Typography>
-              {phone.Name}
-            </Typography>
-            <Typography>
-              {phone.Price}
-
-            </Typography>
-            <Typography>
-              {phone.Brand}
-            </Typography>
-          </Card>
-        ))}
-      </Container>
-      <Container>
-        {props.state.phoneData.map((phone) => (
-          <Card className={classes.card}>
-            <Typography>
-              {phone.Name}
-            </Typography>
-            <Typography>
-              {phone.Price}
-
-            </Typography>
-            <Typography>
-              {phone.Brand}
-            </Typography>
-          </Card>
-        ))}
-      </Container> */}
-
-
-      {/* <Container>
-      {props.state.phoneData.map((phone) => (
-      <Card className={classes.card}>
-        <CardActionArea>
-         
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-        <CardMedia
-          className={classes.media}
-          image= "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_announce-iphone12pro_10132020_big.jpg.large.jpg"
-          title="Contemplative Reptile"
-        />
-            {phone.Name}
-            
-            </Typography>
-            
-            <Typography gutterBottom variant="h5" component="h2">
-            {phone.Brand}
-            </Typography>
-            <Typography gutterBottom variant="h5" component="h2">
-            {phone.Price}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-            {phone.Model}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
-        </CardActions>
-      </Card>
-      ))}
-      </Container> */}
-      <Container>
-        {props.state.phoneData.map((phone) => (
-          <Card className={classes.root}>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                  Pf
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              title={phone.Name}
-
-            />
-            <CardMedia
-              className={classes.media}
-              image="/static/images/cards/paella.jpg"
-              title="Paella dish"
-            />
-            <CardContent>
-                
-              <Typography variant="body2" color="textSecondary" component="p">
-                
-              </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-              <IconButton
-                className={clsx(classes.expand, {
-                  [classes.expandOpen]: expanded,
-                })}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </IconButton>
-                <Typography>Specifications</Typography>
-            </CardActions>
-            <Collapse  in={expanded} timeout="auto" unmountOnExit> 
+          <Card className={classes.cardd} onClick={() => handleClickOpen(phone)} >
+            <CardActionArea>
+              <CardMedia style={{ width: "90px", height: "200px", marginLeft:"70px", marginTop:"20px"  }}
+                className={classes.media}>
+                <img style={{ width: "100px", height: "200px",  }}src="https://rukminim1.flixcart.com/image/416/416/kg8avm80/mobile/r/h/z/apple-iphone-12-dummyapplefsn-original-imafwg8dqgncgbcb.jpeg?q=70" alt="" />
+              
+              </CardMedia>
               <CardContent>
-                
-                <Typography >
-                Ram = {phone.Specification.Ram}
-                <Typography paragraph>
-                Weight = {phone.Specification.Weight}
-                <Typography paragraph>
-                CameraMain = {phone.Specification.CameraMain} 
-                <Typography paragraph>
-                CameraSecondary = {phone.Specification.CameraSecondary}
-                <Typography paragraph>
-                CameraFront = {phone.Specification.CameraFront}
-                <Typography paragraph>
-                CameraVideoRes = {phone.Specification.CameraVideoRes}
-                <Typography paragraph>
-                Weight = {phone.Specification.Weight}
-                <Typography paragraph>
-                is5G = {phone.Specification.is5G}
-                 
-                <Typography paragraph>
-                Os = {phone.Specification.Os}
-                 
-                <Typography paragraph>
-                ExternalMemory = {phone.Specification.ExternalMemory}
-                 
-                <Typography paragraph>
-                InternalMemory = {phone.Specification.InternalMemory}
-                 
+                <Typography gutterBottom variant="h5" component="h2">
+                  {phone.Name}
                 </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {phone.Brand}
                 </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {phone.Price} INR
                 </Typography>
-                </Typography>
-                </Typography>
-                </Typography>
-                </Typography>
-                </Typography>
-                </Typography>
-                </Typography>
-                
-                </Typography>
-                
               </CardContent>
-            </Collapse>
+            </CardActionArea>
+            <CardActions>
+
+
+            </CardActions>
           </Card>
         ))}
       </Container>
+
+
+
+
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <AppBar style={{ background: "linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%)", position: "static" }} className={classes.appBar}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              {selectedPhone.Name}
+            </Typography>
+            <Button autoFocus color="inherit" onClick={handleClose}>
+              {selectedPhone.Brand}
+            </Button>
+          </Toolbar>
+        </AppBar>
+
+        <Card style={{ display: "flex", justifyContent: "center", alignItems: "center" }} className={classes.DiaCard}>
+          <CardContent>
+            <img src="https://rukminim1.flixcart.com/image/416/416/kg8avm80/mobile/y/7/n/apple-iphone-12-dummyapplefsn-original-imafwg8dqq7z8cgh.jpeg" alt="" />
+            <Typography style={{ fontSize: "30px", fontWeight: "bolder" }} >
+              Specifications
+              <Typography>
+                DisplayRes : {selectedPhone?.Specification?.DisplayRes}
+              </Typography>
+              <Typography>
+                DisplayType : {selectedPhone?.Specification?.DisplayType}
+              </Typography>
+              <Typography>
+                Ram : {selectedPhone?.Specification?.Ram}
+              </Typography>
+              <Typography>
+                Weight : {selectedPhone?.Specification?.Weight}
+              </Typography>
+              <Typography>
+                Os : {selectedPhone?.Specification?.Os}
+              </Typography>
+              <Typography>
+                InternalMemory : {selectedPhone?.Specification?.InternalMemory}
+              </Typography>
+              <Typography>
+                ExternalMemory : {selectedPhone?.Specification?.ExternalMemory}
+              </Typography>
+              <Typography>
+                CameraSecondary : {selectedPhone?.Specification?.CameraSecondary}
+              </Typography>
+              <Typography>
+                CameraVideoRes : {selectedPhone?.Specification?.CameraVideoRes}
+              </Typography>
+              <Typography>
+                Weight : {selectedPhone?.Specification?.Weight}
+              </Typography>
+              <Typography>
+                is5G : {selectedPhone?.Specification?.is5G}
+              </Typography>
+
+            </Typography>
+
+          </CardContent>
+          <CardActions>
+
+          </CardActions>
+        </Card>
+       
+
+
+      </Dialog>
+
+
+
+
+
       );
-
-
-
-
-
-
-
-
     </>
   );
 

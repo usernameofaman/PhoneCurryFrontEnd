@@ -20,9 +20,10 @@ function App() {
         <Route exact path="/savePhoneData" component={SavePhoneData} />
         <Route exact path="/viewPhone" component={ViewPhone} />
         <Route exact path="/ExtractData" component={ExtractData} />
-        <Route path="/signin" component={Login} />
+        <Route path="/Admin" component={Login} />
         <Route path="/Home" component={Home} />
         <Route path="/Redux" component={Redux} />
+        <Route path="*" component={() => "404 NOT FOUND"} />
       </Switch>
     </BrowserRouter>
   );
